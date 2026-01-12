@@ -32,7 +32,6 @@ export default function Home() {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16">
         <div className="grid grid-cols-2 gap-4 md:gap-12 items-center">
-          {/* Left Column - Text Content */}
           <div className="">
             <div className="font-(family-name:--font-baloo)">
               <h2 className="text-xl md:text-5xl font-extrabold leading-tight">
@@ -189,7 +188,6 @@ export default function Home() {
             </div>
           </div>
 
-          {/* Bottom Bar - Copyright and Legal Links */}
           <div className="border-t border-[#1A3557] pt-8">
             <div className="flex flex-col md:flex-row justify-between items-center text-sm text-[#8B9DB3]">
               <p className="mb-4 md:mb-0">
