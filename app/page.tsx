@@ -23,7 +23,7 @@ export default function Home() {
           </div>
           <Link
             href="/auth"
-            className="px-6 py-2.5 bg-orange-500 text-white font-semibold rounded-full hover:bg-orange-600 transition-colors duration-200"
+            className="px-6 py-2.5 bg-gradient-to-r from-[#FF8F38] to-[#EA6000] text-white font-semibold rounded-full"
           >
             Start Selling
           </Link>
@@ -33,7 +33,7 @@ export default function Home() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16">
         <div className="grid grid-cols-2 gap-4 md:gap-12 items-center">
           <div className="">
-            <div className="font-(family-name:--font-baloo)">
+            <div className="font-(family-name:--font-baloo) text-black">
               <h2 className="text-xl md:text-5xl font-extrabold leading-tight">
                 From home-grown
               </h2>
@@ -47,12 +47,12 @@ export default function Home() {
 
             <p className="text-sm md:text-lg text-black py-3 md:py-6">
               Register with a valid GSTIN and an active bank account to become a
-              Viraaj.in seller.
+              ViRaaJ Heritage Tech seller.
             </p>
 
             <Link
               href="/auth"
-              className="inline-block px-4 py-2 md:px-6 md:py-3 bg-orange-500 text-white font-semibold rounded-full hover:bg-orange-600 transition-colors duration-200 text-sm md:text-lg"
+              className="inline-block px-4 py-2 md:px-6 md:py-3 bg-gradient-to-r from-[#FF8F38] to-[#EA6000] text-white font-semibold rounded-full text-sm md:text-lg"
             >
               Start Selling
             </Link>

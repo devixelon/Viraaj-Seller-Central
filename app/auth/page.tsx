@@ -39,14 +39,13 @@ export default function AuthPage() {
     }
   }, [router]);
 
-  // Show loading while checking authentication
   if (isCheckingAuth) {
     return <LoadingSpinner />;
   }
 
   const handleSignIn = async (
     values: SignInFormValues,
-    { setSubmitting, setErrors }: FormikHelpers<SignInFormValues>
+    { setSubmitting, setErrors }: FormikHelpers<SignInFormValues>,
   ) => {
     try {
       const result = await signIn({
@@ -78,7 +77,7 @@ export default function AuthPage() {
         // Store tokens and user data
         tokenStorage.setTokens(
           data.signIn.accessToken,
-          data.signIn.refreshToken
+          data.signIn.refreshToken,
         );
         userStorage.setUser(data.signIn.user);
 
@@ -103,7 +102,7 @@ export default function AuthPage() {
 
   const handleSignUp = async (
     values: SignUpFormValues,
-    { setSubmitting, setErrors }: FormikHelpers<SignUpFormValues>
+    { setSubmitting, setErrors }: FormikHelpers<SignUpFormValues>,
   ) => {
     try {
       const result = await signUp({
@@ -138,7 +137,7 @@ export default function AuthPage() {
         // Store tokens and user data
         tokenStorage.setTokens(
           data.signUp.accessToken,
-          data.signUp.refreshToken
+          data.signUp.refreshToken,
         );
         userStorage.setUser(data.signUp.user);
 
@@ -212,196 +211,197 @@ export default function AuthPage() {
   };
 
   return (
-    <div className="min-h-screen bg-linear-to-br from-orange-50 to-orange-100 flex items-center justify-center p-4">
-      <div className="bg-white rounded-2xl shadow-2xl w-full max-w-md p-8">
-        {/* Header */}
-        <div className="flex flex-col items-center justify-center mb-8">
-          <LogoIcon />
-          <p className="text-lg font-semibold text-gray-600">Seller Central</p>
-        </div>
+    <div className="relative min-h-screen bg-linear-to-br from-orange-50 to-orange-100">
+      <div className="min-h-screen md:flex md:items-center md:justify-center md:p-4">
+        <div className="relative z-10 bg-white md:rounded-2xl md:shadow-2xl w-full md:max-w-md p-8 min-h-screen md:min-h-0">
+          <div className="flex flex-col items-center justify-center mb-8">
+            <LogoIcon />
+          </div>
 
-        {/* Toggle Buttons */}
-        <div className="flex mb-8 bg-gray-100 rounded-lg p-1">
-          <button
-            type="button"
-            onClick={() => setIsLogin(true)}
-            className={`flex-1 py-2 px-4 rounded-lg font-semibold transition-all duration-200 ${
-              isLogin
-                ? "bg-white text-orange-500 shadow-sm"
-                : "text-gray-600 hover:text-gray-900"
-            }`}
-          >
-            Login
-          </button>
-          <button
-            type="button"
-            onClick={() => setIsLogin(false)}
-            className={`flex-1 py-2 px-4 rounded-lg font-semibold transition-all duration-200 ${
-              !isLogin
-                ? "bg-white text-orange-500 shadow-sm"
-                : "text-gray-600 hover:text-gray-900"
-            }`}
-          >
-            Sign Up
-          </button>
-        </div>
+          <div className="flex mb-8 bg-gray-100 rounded-lg p-1">
+            <button
+              type="button"
+              onClick={() => setIsLogin(true)}
+              className={`flex-1 py-2 px-4 rounded-lg font-semibold transition-all duration-200 ${
+                isLogin
+                  ? "bg-white text-orange-500 shadow-sm"
+                  : "text-gray-600 hover:text-gray-900"
+              }`}
+            >
+              Login
+            </button>
+            <button
+              type="button"
+              onClick={() => setIsLogin(false)}
+              className={`flex-1 py-2 px-4 rounded-lg font-semibold transition-all duration-200 ${
+                !isLogin
+                  ? "bg-white text-orange-500 shadow-sm"
+                  : "text-gray-600 hover:text-gray-900"
+              }`}
+            >
+              Sign Up
+            </button>
+          </div>
 
-        {/* Forms */}
-        {isLogin ? (
-          <Formik
-            initialValues={{ emailOrMobile: "", password: "" }}
-            validate={validateSignIn}
-            onSubmit={handleSignIn}
-          >
-            {({
-              values,
-              errors,
-              touched,
-              handleChange,
-              handleBlur,
-              isSubmitting,
-            }) => (
-              <Form className="space-y-6">
-                <Input
-                  label="Email or Mobile Number"
-                  name="emailOrMobile"
-                  type="text"
-                  placeholder="Enter your email or mobile number"
-                  value={values.emailOrMobile}
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  error={errors.emailOrMobile}
-                  touched={touched.emailOrMobile}
-                  required
-                  disabled={isSubmitting}
-                />
+          {/* Forms */}
+          {isLogin ? (
+            <Formik
+              initialValues={{ emailOrMobile: "", password: "" }}
+              validate={validateSignIn}
+              onSubmit={handleSignIn}
+            >
+              {({
+                values,
+                errors,
+                touched,
+                handleChange,
+                handleBlur,
+                isSubmitting,
+              }) => (
+                <Form className="space-y-6">
+                  <Input
+                    label="Email or Mobile Number"
+                    name="emailOrMobile"
+                    type="text"
+                    placeholder="Enter your email or mobile number"
+                    value={values.emailOrMobile}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    error={errors.emailOrMobile}
+                    touched={touched.emailOrMobile}
+                    required
+                    disabled={isSubmitting}
+                  />
 
-                <Input
-                  label="Password"
-                  name="password"
-                  type="password"
-                  placeholder="Enter your password"
-                  value={values.password}
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  error={errors.password}
-                  touched={touched.password}
-                  required
-                  disabled={isSubmitting}
-                />
+                  <Input
+                    label="Password"
+                    name="password"
+                    type="password"
+                    placeholder="Enter your password"
+                    value={values.password}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    error={errors.password}
+                    touched={touched.password}
+                    required
+                    disabled={isSubmitting}
+                  />
 
-                <button
-                  type="submit"
-                  disabled={isSubmitting || signInLoading}
-                  className="w-full bg-orange-500 text-white py-3 px-6 rounded-lg font-semibold hover:bg-orange-600 transition-colors duration-200 disabled:bg-gray-400 disabled:cursor-not-allowed"
-                >
-                  {isSubmitting || signInLoading ? "Signing in..." : "Sign In"}
-                </button>
-              </Form>
-            )}
-          </Formik>
-        ) : (
-          <Formik
-            initialValues={{
-              email: "",
-              mobileNumber: "",
-              password: "",
-              passwordConfirm: "",
-            }}
-            validate={validateSignUp}
-            onSubmit={handleSignUp}
-          >
-            {({
-              values,
-              errors,
-              touched,
-              handleChange,
-              handleBlur,
-              isSubmitting,
-            }) => (
-              <Form className="space-y-6">
-                <Input
-                  label="Email"
-                  name="email"
-                  type="email"
-                  placeholder="Enter your email"
-                  value={values.email}
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  error={errors.email}
-                  touched={touched.email}
-                  required
-                  disabled={isSubmitting}
-                />
+                  <button
+                    type="submit"
+                    disabled={isSubmitting || signInLoading}
+                    className="w-full bg-orange-500 text-white py-3 px-6 rounded-lg font-semibold hover:bg-orange-600 transition-colors duration-200 disabled:bg-gray-400 disabled:cursor-not-allowed"
+                  >
+                    {isSubmitting || signInLoading
+                      ? "Signing in..."
+                      : "Sign In"}
+                  </button>
+                </Form>
+              )}
+            </Formik>
+          ) : (
+            <Formik
+              initialValues={{
+                email: "",
+                mobileNumber: "",
+                password: "",
+                passwordConfirm: "",
+              }}
+              validate={validateSignUp}
+              onSubmit={handleSignUp}
+            >
+              {({
+                values,
+                errors,
+                touched,
+                handleChange,
+                handleBlur,
+                isSubmitting,
+              }) => (
+                <Form className="space-y-6">
+                  <Input
+                    label="Email"
+                    name="email"
+                    type="email"
+                    placeholder="Enter your email"
+                    value={values.email}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    error={errors.email}
+                    touched={touched.email}
+                    required
+                    disabled={isSubmitting}
+                  />
 
-                <Input
-                  label="Mobile Number"
-                  name="mobileNumber"
-                  type="tel"
-                  placeholder="+1234567890"
-                  value={values.mobileNumber}
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  error={errors.mobileNumber}
-                  touched={touched.mobileNumber}
-                  required
-                  disabled={isSubmitting}
-                />
+                  <Input
+                    label="Mobile Number"
+                    name="mobileNumber"
+                    type="tel"
+                    placeholder="+1234567890"
+                    value={values.mobileNumber}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    error={errors.mobileNumber}
+                    touched={touched.mobileNumber}
+                    required
+                    disabled={isSubmitting}
+                  />
 
-                <Input
-                  label="Password"
-                  name="password"
-                  type="password"
-                  placeholder="Create a password"
-                  value={values.password}
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  error={errors.password}
-                  touched={touched.password}
-                  required
-                  disabled={isSubmitting}
-                />
+                  <Input
+                    label="Password"
+                    name="password"
+                    type="password"
+                    placeholder="Create a password"
+                    value={values.password}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    error={errors.password}
+                    touched={touched.password}
+                    required
+                    disabled={isSubmitting}
+                  />
 
-                <Input
-                  label="Confirm Password"
-                  name="passwordConfirm"
-                  type="password"
-                  placeholder="Confirm your password"
-                  value={values.passwordConfirm}
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  error={errors.passwordConfirm}
-                  touched={touched.passwordConfirm}
-                  required
-                  disabled={isSubmitting}
-                />
+                  <Input
+                    label="Confirm Password"
+                    name="passwordConfirm"
+                    type="password"
+                    placeholder="Confirm your password"
+                    value={values.passwordConfirm}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    error={errors.passwordConfirm}
+                    touched={touched.passwordConfirm}
+                    required
+                    disabled={isSubmitting}
+                  />
 
-                <button
-                  type="submit"
-                  disabled={isSubmitting || signUpLoading}
-                  className="w-full bg-orange-500 text-white py-2 px-6 rounded-lg font-semibold hover:bg-orange-600 transition-colors duration-200 disabled:bg-gray-400 disabled:cursor-not-allowed"
-                >
-                  {isSubmitting || signUpLoading
-                    ? "Creating account..."
-                    : "Sign Up"}
-                </button>
-              </Form>
-            )}
-          </Formik>
-        )}
+                  <button
+                    type="submit"
+                    disabled={isSubmitting || signUpLoading}
+                    className="w-full bg-gradient-to-r from-[#FF8F38] to-[#EA6000] text-white py-2 px-6 rounded-lg font-semibold hover:bg-orange-600 transition-colors duration-200 disabled:bg-gray-400 disabled:cursor-not-allowed"
+                  >
+                    {isSubmitting || signUpLoading
+                      ? "Creating account..."
+                      : "Sign Up"}
+                  </button>
+                </Form>
+              )}
+            </Formik>
+          )}
 
-        {/* Footer */}
-        <div className="mt-8 text-center">
-          <p className="text-sm text-gray-600">
-            By continuing, you agree to Viraaj&apos;s{" "}
-            <a href="#" className="text-orange-500 hover:underline">
-              Terms of Service
-            </a>{" "}
-            and{" "}
-            <a href="#" className="text-orange-500 hover:underline">
-              Privacy Policy
-            </a>
-          </p>
+          {/* Footer */}
+          <div className="mt-8 text-center">
+            <p className="text-sm text-gray-600">
+              By continuing, you agree to Viraaj&apos;s{" "}
+              <a href="#" className="text-orange-500 hover:underline">
+                Terms of Service
+              </a>{" "}
+              and{" "}
+              <a href="#" className="text-orange-500 hover:underline">
+                Privacy Policy
+              </a>
+            </p>
+          </div>
         </div>
       </div>
     </div>
