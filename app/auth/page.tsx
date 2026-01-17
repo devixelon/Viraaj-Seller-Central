@@ -239,13 +239,14 @@ export default function AuthPage() {
           height={600}
           className="w-full h-auto object-contain absolute bottom-0"
           priority
-          quality={90}
+          quality={75}
         />
       </div>
       <div className="min-h-screen md:flex md:items-center md:justify-center md:p-4">
         <div className="relative z-10 bg-white md:rounded-2xl md:shadow-2xl w-full md:max-w-md p-8 min-h-screen md:min-h-0">
           <div className="flex flex-col items-center justify-center mb-8">
             <LogoIcon />
+            <p className="mt-4 text-base text-black text-center font-bold">Seller Central</p>
           </div>
 
           <div className="flex mb-8 bg-gray-100 rounded-lg p-1">
