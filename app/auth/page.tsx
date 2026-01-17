@@ -239,7 +239,7 @@ export default function AuthPage() {
           height={600}
           className="w-full h-auto object-contain absolute bottom-0"
           priority
-          quality={75}
+          quality={90}
         />
       </div>
       <div className="min-h-screen md:flex md:items-center md:justify-center md:p-4">
