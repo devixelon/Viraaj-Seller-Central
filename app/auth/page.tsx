@@ -9,6 +9,7 @@ import { tokenStorage, userStorage, isAuthenticated } from "@/lib/auth";
 import { getErrorMessage } from "@/lib/errors";
 import { useGraphQLMutation } from "@/hooks/useGraphQL";
 import { LogoIcon } from "@/components/icons";
+import Image from "next/image";
 
 interface SignInFormValues {
   emailOrMobile: string;
@@ -40,7 +41,25 @@ export default function AuthPage() {
   }, [router]);
 
   if (isCheckingAuth) {
-    return <LoadingSpinner />;
+    return (
+      <div className="relative min-h-screen bg-white">
+        <div className="hidden md:block absolute bottom-0 left-0 right-0 z-0 h-full items-end">
+          <Image
+            src="/auth-background-cover.webp"
+            alt="Auth Background"
+            width={1920}
+            height={600}
+            className="w-full h-auto object-contain absolute bottom-0"
+            priority
+            quality={90}
+          />
+        </div>
+
+        <div className="relative z-10 min-h-screen flex items-center justify-center">
+          <LoadingSpinner />
+        </div>
+      </div>
+    );
   }
 
   const handleSignIn = async (
@@ -211,7 +230,18 @@ export default function AuthPage() {
   };
 
   return (
-    <div className="relative min-h-screen bg-linear-to-br from-orange-50 to-orange-100">
+    <div className="relative min-h-screen bg-white">
+      <div className="hidden md:block absolute bottom-0 left-0 right-0 z-0 h-full items-end">
+        <Image
+          src="/auth-background-cover.webp"
+          alt="Auth Background"
+          width={1920}
+          height={600}
+          className="w-full h-auto object-contain absolute bottom-0"
+          priority
+          quality={90}
+        />
+      </div>
       <div className="min-h-screen md:flex md:items-center md:justify-center md:p-4">
         <div className="relative z-10 bg-white md:rounded-2xl md:shadow-2xl w-full md:max-w-md p-8 min-h-screen md:min-h-0">
           <div className="flex flex-col items-center justify-center mb-8">

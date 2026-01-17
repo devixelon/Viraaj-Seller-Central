@@ -23,7 +23,7 @@ export default function SellerDashboardPage() {
     SELLER_APPLICATION_STATUS,
     {
       skip: true,
-    }
+    },
   );
 
   useEffect(() => {
@@ -79,7 +79,13 @@ export default function SellerDashboardPage() {
   };
 
   if (!user) {
-    return <LoadingSpinner />;
+    return (
+      <div className="relative min-h-screen bg-white">
+        <div className="relative z-10 min-h-screen flex items-center justify-center">
+          <LoadingSpinner />
+        </div>
+      </div>
+    );
   }
 
   return (
